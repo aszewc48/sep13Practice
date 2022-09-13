@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('dev'))
 
 const authRoutes = require('./routes/auth.routes.js')
-const { application } = require('express')
+//const { application } = require('express')
 app.use('/', authRoutes)
 
 

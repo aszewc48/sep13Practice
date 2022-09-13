@@ -3,8 +3,7 @@ const router = Express.Router()
 const User = require('../models/User.model')
 const bcryptjs = require('bcryptjs')
 
-const isAuthenticated = require('../middlewares/auth.middleware')
-const isNotAuthenticated = require('../middlewares/auth.middleware')
+const {isAuthenticated, isNotAuthenticated} = require('../middlewares/auth.middleware')
 
 router.get('/', (req,res,next) => {
     res.render('index.hbs')
@@ -78,4 +77,10 @@ router.get('/protected', isAuthenticated, (req,res,next) => {
     res.send('this route is protected')
 })
 
+router.get('/logout', isAuthenticated, (req,res,next) => {
+    req.session.destroy(() => {
+        res.redirect('/')
+    })
+
+})
 module.exports = router
